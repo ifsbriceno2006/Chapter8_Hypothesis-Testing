@@ -1,0 +1,260 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Chapter 8 Study Guide: Introduction to Hypothesis Testing</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<style>
+:root{--bg:#f2f6f8;--card:#fff;--ink:#12263a;--mut:#51657a;--teal:#0f7c8a;--tb:#dff1f3;--amb:#8a5200;--ab:#fff2d9;--ok:#1d7a46;--ob:#dff3e7;--bad:#b83a2f;--bb:#fbe4e1;--line:#cfdbe3;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1a26;--card:#162636;--ink:#e6eef5;--mut:#9db0c2;--teal:#4cc3d1;--tb:#12363f;--amb:#f0b35a;--ab:#3a2c12;--ok:#5fcf8f;--ob:#123626;--bad:#ff8a7d;--bb:#401b17;--line:#2b4256}}
+:root[data-theme="dark"]{--bg:#0e1a26;--card:#162636;--ink:#e6eef5;--mut:#9db0c2;--teal:#4cc3d1;--tb:#12363f;--amb:#f0b35a;--ab:#3a2c12;--ok:#5fcf8f;--ob:#123626;--bad:#ff8a7d;--bb:#401b17;--line:#2b4256}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 "Atkinson Hyperlegible",system-ui,sans-serif}
+main,header{max-width:860px;margin:0 auto;padding:0 16px}
+header{padding-top:22px}h1{font-size:1.7rem;margin:0 0 4px;line-height:1.2}header p{margin:0 0 12px;color:var(--mut)}
+nav{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+nav a{padding:7px 12px;border:1px solid var(--line);border-radius:20px;background:var(--card);color:var(--ink);text-decoration:none;font-size:.92rem}
+nav a.on{background:var(--teal);color:var(--bg);border-color:var(--teal);font-weight:700}
+.pg{display:none}.pg.on{display:block}
+h2{font-size:1.4rem;margin:6px 0 10px}h3{font-size:1.1rem;margin:0 0 6px}
+.c{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:0 0 14px}
+.def{border-left:5px solid var(--teal)}.ex{border-left:5px solid var(--amb)}.warn{background:var(--ab)}.f{background:var(--tb);text-align:center;font-size:1.15rem;padding:10px;border-radius:8px;margin:8px 0}
+details{margin:6px 0}summary{cursor:pointer;font-weight:700;color:var(--teal)}
+button,select,input{font:inherit;color:var(--ink)}
+button{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:6px 12px;cursor:pointer}button:hover{border-color:var(--teal)}
+select{background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:4px}
+:focus-visible{outline:3px solid var(--amb);outline-offset:2px}
+input[type=number]{width:5.5em;padding:4px;border:1px solid var(--line);border-radius:6px;background:var(--bg)}
+table{border-collapse:collapse;width:100%}td,th{border:1px solid var(--line);padding:5px 8px;text-align:left}
+.sc{overflow-x:auto}.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:6px 0}
+.q{margin:0 0 12px;padding-bottom:10px;border-bottom:1px dashed var(--line)}.q button{display:block;width:100%;text-align:left;margin:4px 0}
+.q .r{background:var(--ob);border-color:var(--ok)}.q .w{background:var(--bb);border-color:var(--bad)}
+.out{background:var(--tb);border-radius:8px;padding:8px 12px;margin-top:8px}.sol{color:var(--ok);font-weight:700}
+.p{padding:8px 0;border-bottom:1px dashed var(--line)}.yes{color:var(--ok);font-weight:700}.no{color:var(--bad);font-weight:700}
+@media(prefers-reduced-motion:no-preference){.pg.on{animation:f .25s}@keyframes f{from{opacity:.3}}}
+</style></head><body>
+<header><h1>📗 Chapter 8 Study Guide</h1><p>Introduction to Hypothesis Testing (Gravetter &amp; Wallnau)</p>
+<nav id="nav"></nav></header>
+<main>
+
+<section class="pg" id="big">
+<h2>🎯 The big picture</h2>
+<div class="c"><p>A <b>hypothesis test</b> uses sample data to decide whether a treatment really has an effect on a population, or whether the sample just looks different by chance. It combines three tools you already have: z-scores, probability, and the distribution of sample means (Chapter 7).</p>
+<h3>The five steps (used for the rest of the course)</h3>
+<ol><li><b>State the hypotheses</b> (H<sub>0</sub> and H<sub>1</sub>) and choose α.</li><li><b>Locate the critical region</b> using α and the unit normal table.</li><li><b>Compute the test statistic</b> (here, z) from the sample.</li><li><b>Make a decision</b>: reject H<sub>0</sub> or fail to reject H<sub>0</sub>.</li><li><b>State the conclusion</b> in research-report style: “statistically significant” (or not), the obtained z, <i>p</i> &lt; α or <i>p</i> &gt; α, and Cohen’s d when needed.</li></ol></div>
+<div class="c def"><h3>📝 Step 5 template</h3><p><b>Significant:</b> “The treatment had a <b>statistically significant</b> effect on [variable], <i>z</i> = 2.25, <i>p</i> &lt; .05, <i>d</i> = 0.38.”<br><b>Not significant:</b> “The treatment did <b>not</b> have a statistically significant effect on [variable], <i>z</i> = 0.75, <i>p</i> &gt; .05.”</p><p><i>p</i> &lt; α means z is in the critical region (reject H<sub>0</sub>). <i>p</i> &gt; α means it is not (fail to reject). Add Cohen’s d when the result is significant, to show how large the effect is.</p></div>
+<div class="c def"><h3>Key formulas</h3><div class="f">z = (M − μ) / σ<sub>M</sub> &nbsp;&nbsp; σ<sub>M</sub> = σ/√n</div><div class="f">Cohen’s d = mean difference / σ &nbsp;&nbsp; Power = 1 − β</div></div>
+<div class="c"><h3>Decision outcomes</h3><div class="sc"><table><tr><th></th><th>H<sub>0</sub> true (no effect)</th><th>H<sub>0</sub> false (effect exists)</th></tr><tr><td>Reject H<sub>0</sub></td><td class="no">Type I error (probability α)</td><td class="yes">Correct (power = 1 − β)</td></tr><tr><td>Fail to reject H<sub>0</sub></td><td class="yes">Correct</td><td class="no">Type II error (probability β)</td></tr></table></div></div>
+<div class="c warn"><h3>⚠️ Common mistakes</h3><ul><li>Writing hypotheses about the sample mean (M). They are always about the population (μ).</li><li>Saying “H<sub>0</sub> is proven true” after failing to reject. The result is only inconclusive.</li><li>Using σ instead of σ<sub>M</sub> in the z formula.</li><li>Putting the critical region in the wrong tail for a directional test.</li><li>Treating “significant” as “big.” Report effect size too.</li><li>Stopping at “reject H<sub>0</sub>” without writing the Step 5 conclusion.</li></ul></div>
+<div class="c"><h3>📚 Key terms</h3><p>Hypothesis test · null hypothesis · alternative hypothesis · alpha level (level of significance) · critical region · test statistic · Type I error · Type II error · beta · significant · directional (one-tailed) test · effect size · Cohen’s d · power</p></div>
+</section>
+
+<section class="pg" id="s81"><h2>8.1 The logic of hypothesis testing</h2>
+<div class="c def"><p><b>The setup:</b> we know the population <i>before</i> treatment. We want to know what the population mean would be <i>after</i> treatment, but we cannot treat everyone. So we treat a sample and compare it with what untreated samples look like. We assume the treatment, if it works, adds or subtracts a constant, so the shape and σ stay the same.</p>
+<p><b>Null hypothesis (H<sub>0</sub>):</b> the treatment has no effect.<br><b>Alternative hypothesis (H<sub>1</sub>):</b> the treatment does have an effect. Both are about <i>population</i> parameters, and exactly one can be true.</p>
+<p><b>Alpha level (α):</b> the probability that defines “very unlikely” (usually .05, .01 or .001). <b>Critical region:</b> the extreme sample means, in the tails of the distribution if H<sub>0</sub> is true. A sample mean there means we reject H<sub>0</sub>. For a two-tailed test: α = .05 gives z = ±1.96; α = .01 gives ±2.58; α = .001 gives ±3.30.</p></div>
+<div class="c ex"><h3>✏️ Example 8.1 (worked): red shirts and tips</h3><p>Waitresses’ tips from male customers average μ = 15.8% (σ = 2.4, roughly normal). Researchers have waitresses wear red and record n = 36 tips.</p>
+<details open><summary>Step 1: hypotheses and α</summary>H<sub>0</sub>: μ<sub>red</sub> = 15.8 (no effect). H<sub>1</sub>: μ<sub>red</sub> ≠ 15.8. Set α = .05.</details>
+<details><summary>Step 2: critical region</summary>Two-tailed, α = .05: reject if z is beyond ±1.96. The standard error is σ<sub>M</sub> = 2.4/√36 = 0.4.</details>
+<details><summary>Step 3: compute z (if M = 16.7)</summary>z = (16.7 − 15.8)/0.4 = <b>2.25</b></details>
+<details><summary>Step 4: make a decision</summary>2.25 is beyond 1.96, so we <b>reject H<sub>0</sub></b>.</details>
+<details><summary>Step 5: state the conclusion</summary>“Wearing a red shirt had a <b>statistically significant</b> effect on tips, <i>z</i> = 2.25, <i>p</i> &lt; .05, <i>d</i> = 0.38.” (d = 0.9/2.4 = 0.38, reported because the result is significant.)</details>
+<details><summary>What if M = 16.1 instead?</summary>Step 3: z = 0.3/0.4 = 0.75, not in the critical region. Step 4: <b>fail to reject H<sub>0</sub></b>. Step 5: “The red shirt did <b>not</b> have a statistically significant effect on tips, <i>z</i> = 0.75, <i>p</i> &gt; .05.” (Cohen’s d is not needed when the result is not significant.)</details></div>
+<div class="c ex"><h3>✏️ Example 8.2: try first</h3><p>Normal population, μ = 40, σ = 8. After treatment, a sample of n = 16 has M = 45. Is there a significant effect with α = .05 (two-tailed)?</p>
+<details><summary>Show solution</summary>σ<sub>M</sub> = 8/4 = 2; z = 5/2 = <b>2.50</b>. Step 4: this is beyond ±1.96, so <b>reject H<sub>0</sub></b>. Step 5: “The treatment had a statistically significant effect, <i>z</i> = 2.50, <i>p</i> &lt; .05, <i>d</i> = 0.63.”</details></div>
+<div class="c def"><h3>⚖️ A courtroom analogy</h3><p>H<sub>0</sub> is “innocent until proven guilty.” Enough evidence means reject H<sub>0</sub> (guilty). Not enough evidence means <i>fail to reject</i>, which is not the same as proving innocence. Likewise, failing to reject H<sub>0</sub> does not prove there is no effect.</p>
+<p><b>z as a ratio:</b> z = actual difference between M and the hypothesised μ ÷ the difference expected by chance (σ<sub>M</sub>). A z of 3.00 means the difference is 3 times larger than chance alone would produce.</p></div>
+<div class="c"><h3>🧮 Hypothesis test calculator</h3><div id="t1"></div></div>
+<div id="lc-s81"></div></section>
+
+<section class="pg" id="s82"><h2>8.2 Uncertainty and errors in hypothesis testing</h2>
+<p>A sample gives only partial information, so any decision could be wrong. There are two ways to be wrong. Start with the story, then the formal definitions.</p>
+<div class="c ex"><h3>🐺 A simple story: the shepherd and the wolf</h3>
+<p>A shepherd watches the sheep. The village rule (H<sub>0</sub>) is <b>“there is no wolf; everything is normal.”</b> The shepherd looks for clues (the sample data) and must choose: shout <b>“WOLF!”</b> (reject H<sub>0</sub>) or stay quiet (fail to reject H<sub>0</sub>). A shepherd can’t see everything, so sometimes he gets it wrong.</p>
+<div class="sc"><table><tr><th></th><th>No wolf (H<sub>0</sub> true)</th><th>A wolf is really there (H<sub>0</sub> false)</th></tr>
+<tr><th>Shout “WOLF!” (reject H<sub>0</sub>)</th><td class="no">😱 Type I: a false alarm. It was a dog’s shadow and everyone ran outside for nothing.</td><td class="yes">✅ Correct: the wolf is caught.</td></tr>
+<tr><th>Stay quiet (fail to reject H<sub>0</sub>)</th><td class="yes">✅ Correct: a calm night.</td><td class="no">😴 Type II: a miss. The wolf sneaks in and nobody was warned.</td></tr></table></div>
+<ul><li><b>Type I = crying wolf when there is no wolf.</b> In research: saying “it works!” when it doesn’t.</li><li><b>Type II = sleeping while the wolf arrives.</b> In research: saying “no proof” when it really does work.</li><li><b>α is how jumpy the shepherd is.</b> A tiny α means he only shouts when he is very sure: fewer false alarms, but he may miss a quiet wolf.</li></ul>
+<p>The same idea in other places:</p>
+<div class="sc"><table><tr><th></th><th>Smoke alarm (H<sub>0</sub>: no fire)</th><th>Courtroom (H<sub>0</sub>: innocent)</th><th>Research (H<sub>0</sub>: no effect)</th></tr>
+<tr><td>Type I</td><td>Rings for burnt toast</td><td>Convict an innocent person</td><td>Claim a treatment works when it doesn’t</td></tr>
+<tr><td>Type II</td><td>Silent during a real fire</td><td>Free a guilty person</td><td>Miss a treatment that really works</td></tr></table></div></div>
+<div class="c def"><h3>Type I error</h3><p>Rejecting a <b>true</b> null hypothesis: concluding there is an effect when there isn’t one. It happens when chance gives you an extreme sample. It is a serious error because it leads to false reports. <b>P(Type I error) = α</b>, which the researcher controls.</p></div>
+<div class="c def"><h3>Type II error</h3><p>Failing to reject a <b>false</b> null hypothesis: missing a real effect, often because the effect is small. It is usually less serious. Its probability, β, has no single value because it depends on factors like effect size and sample size.</p></div>
+<div class="c"><h3>Choosing alpha: a trade-off</h3><p>A smaller α lowers the risk of a Type I error, but pushes the critical boundaries farther out (±1.96, ±2.58, ±3.30 for .05, .01, .001), so more evidence is needed to reject H<sub>0</sub>. An extremely tiny α would make rejection nearly impossible. The largest acceptable value is α = .05.</p></div>
+<div class="c def"><h3>🔍 A 2-question trick to name the error</h3><ol><li><b>What did the researcher decide?</b> If they <b>rejected</b> H<sub>0</sub>, the only possible mistake is Type I. If they <b>failed to reject</b>, the only possible mistake is Type II.</li><li><b>What is really true?</b> If the decision matches reality, it is correct. If it doesn’t, it is the error from question 1.</li></ol><p>You can never make both errors in the same test, because you either reject H<sub>0</sub> or you don’t.</p></div>
+<div class="c ex"><h3>🎚️ Play with the alarm</h3><p style="margin-top:0">Slide α (how jumpy the alarm is) and the size of the real effect. Teal curve: nothing is going on (H<sub>0</sub> true). Dashed curve: a real effect exists. Red area = Type I risk. Orange area = Type II risk. (Simplified one-tailed picture.)</p>
+<div class="row">α <input type="range" id="ea" min="5" max="100" value="50" style="accent-color:var(--teal)"> <b id="eav"></b></div>
+<div class="row">Real effect <input type="range" id="ed" min="5" max="40" value="25" style="accent-color:var(--teal)"></div>
+<svg id="esvg" viewBox="0 0 400 120" width="100%" role="img" aria-label="Two overlapping curves with the alarm line; the red area is Type I risk and the orange area is Type II risk"></svg><div class="out" id="eout"></div></div>
+<div id="eq1"></div><div id="eq2"></div>
+<div id="lc-s82"></div></section>
+
+<section class="pg" id="s83"><h2>8.3 More about hypothesis tests</h2>
+<div class="c def"><h3>📰 Step 5: state the conclusion (reporting results)</h3><p>Example: “Wearing a red shirt had a <b>statistically significant</b> effect on tips, <i>z</i> = 2.25, <i>p</i> &lt; .05, <i>d</i> = 0.38.”<br>Not significant: “…did not have a statistically significant effect…, <i>z</i> = 0.75, <i>p</i> &gt; .05.”</p>
+<ul><li><b>Significant</b> means H<sub>0</sub> was rejected: the result is very unlikely if there is no effect.</li><li><i>z</i> = 2.25 is the test statistic value.</li><li><i>d</i> = 0.38 is Cohen’s d, added when the result is significant to show the size of the effect.</li><li><i>p</i> &lt; .05 means the result is in the critical region (and the chance of a Type I error is under .05). Not significant is reported as <i>p</i> &gt; .05.</li><li>Software gives an exact p (for example, p = .0244). It must still be below .05 to be significant.</li></ul></div>
+<div class="c ex"><h3>✏️ What changes the z-score? (worked)</h3><p>Start with the red-shirt study: μ = 15.8, M = 16.7, σ = 2.4, n = 36, so z = 2.25 (significant).</p>
+<div class="sc"><table><tr><th>Change</th><th>σ<sub>M</sub></th><th>z</th><th>Decision (±1.96)</th></tr><tr><td>Original</td><td>2.4/6 = 0.4</td><td>2.25</td><td>Reject H<sub>0</sub></td></tr><tr><td>More variability, σ = 5.4</td><td>5.4/6 = 0.9</td><td>1.00</td><td>Fail to reject</td></tr><tr><td>Bigger sample, n = 144</td><td>2.4/12 = 0.2</td><td>4.50</td><td>Reject H<sub>0</sub></td></tr></table></div>
+<p>Larger mean difference → larger z. Larger σ → smaller z. Larger n → larger z. Experiment below.</p><div id="t3"></div></div>
+<div class="c def"><h3>✅ Assumptions for the z-test</h3><ul><li><b>Random sampling</b> so the sample represents the population.</li><li><b>Independent observations</b>: one score does not influence another (for example, siblings in the sample would break this; so would sampling without replacement from a small group).</li><li><b>σ is unchanged by the treatment</b> (the treatment adds a constant).</li><li><b>Normal sampling distribution</b>: the population is normal or n ≥ about 30.</li></ul></div>
+<div id="lc-s83"></div></section>
+
+<section class="pg" id="s84"><h2>8.4 Directional (one-tailed) hypothesis tests</h2>
+<div class="c def"><p>When there is a strong, pre-stated prediction of <b>direction</b>, put it into the hypotheses. Two things change: (1) H<sub>0</sub> and H<sub>1</sub> state a direction, and (2) the whole critical region sits in one tail. Everything else is the same.</p>
+<p>Tip: write H<sub>1</sub> first. If the treatment is predicted to <b>increase</b> scores: H<sub>1</sub>: μ &gt; 15.8 and H<sub>0</sub>: μ ≤ 15.8, with the critical region in the <b>right</b> tail. For a decrease, use the left tail. At α = .05 the one-tailed boundary is z = 1.65 (compared with ±1.96).</p></div>
+<div class="c ex"><h3>✏️ Example 8.3 (worked): red shirt should increase tips</h3><p>μ = 15.8, σ = 2.4, n = 36, M = 16.5.</p>
+<details open><summary>Step 1: hypotheses</summary>H<sub>1</sub>: μ &gt; 15.8. H<sub>0</sub>: μ ≤ 15.8. α = .05.</details>
+<details><summary>Step 2: critical region</summary>All 5% in the right tail: z &gt; 1.65. σ<sub>M</sub> = 0.4.</details>
+<details><summary>Step 3: z</summary>z = (16.5 − 15.8)/0.4 = <b>1.75</b></details>
+<details><summary>Step 4: make a decision</summary>1.75 &gt; 1.65, so we <b>reject H<sub>0</sub></b>.</details>
+<details><summary>Step 5: state the conclusion</summary>“Wearing a red shirt produced a <b>statistically significant</b> increase in tips, <i>z</i> = 1.75, <i>p</i> &lt; .05, one tailed, <i>d</i> = 0.29.” (d = 0.7/2.4.)</details></div>
+<div class="c ex"><h3>✏️ Example 8.4: same data, two-tailed test</h3><p>With the two-tailed boundaries ±1.96, the same z = 1.75 is <b>not</b> in the critical region, so we <b>fail to reject H<sub>0</sub></b> (Step 4). Conclusion (Step 5): the red shirt did not have a statistically significant effect, <i>z</i> = 1.75, <i>p</i> &gt; .05. A one-tailed test rejects H<sub>0</sub> for smaller differences, but only in the predicted direction.</p></div>
+<div class="c warn"><h3>⚠️ Use one-tailed tests carefully</h3><p>Use one only when the direction was predicted <b>before</b> the study and is strongly justified. Use a two-tailed test when there is no clear expectation or when theories compete. If a two-tailed test fails, never switch to a one-tailed test on the same data to rescue significance.</p></div>
+<div class="c"><h3>🧮 Try it: one-tailed vs two-tailed</h3><p style="margin-top:0">Switch the tails menu to see the same M change decision.</p><div id="t4"></div></div>
+<div id="lc-s84"></div></section>
+
+<section class="pg" id="s85"><h2>8.5 Concerns about hypothesis testing: effect size</h2>
+<div class="c def"><h3>Two limitations</h3><ol><li>A test tells you the <i>data</i> are unlikely if H<sub>0</sub> is true. It does not give the probability that H<sub>0</sub> is true.</li><li><b>Significant does not mean large.</b> The test compares the difference with the standard error, so with a big sample even a tiny effect can be significant.</li></ol></div>
+<div class="c ex"><h3>✏️ Example 8.5 (worked): same 1-point difference</h3><p>μ = 50, σ = 10, M = 51.</p><div class="sc"><table><tr><th>n</th><th>σ<sub>M</sub></th><th>z</th><th>Decision (±1.96)</th></tr><tr><td>25</td><td>2.00</td><td>0.50</td><td>Fail to reject</td></tr><tr><td>400</td><td>0.50</td><td>2.00</td><td>Reject H<sub>0</sub></td></tr></table></div></div>
+<div class="c def"><h3>📏 Cohen’s d</h3><div class="f">d = mean difference / standard deviation = (M − μ) / σ</div>
+<p>It measures the <b>size</b> of the effect in standard deviations and is <b>not affected by sample size</b>. Report it as a positive number. Benchmarks: 0.2 small, 0.5 medium, 0.8 large. In Example 8.5 both tests give d = 1/10 = 0.10.</p>
+<p>Distributions overlap even for a large effect, so d = 1.00 can still look modest in a picture. It means the treatment shifted the mean by a full standard deviation.</p></div>
+<div class="c ex"><h3>✏️ Demonstration 8.1 and 8.2 (worked)</h3><p>μ = 65, σ = 15, n = 25, M = 70 after special reading training. Two-tailed, α = .05.</p>
+<details><summary>Hypothesis test (five steps)</summary>1. H<sub>0</sub>: μ = 65; H<sub>1</sub>: μ ≠ 65; α = .05. 2. Critical region: z beyond ±1.96. 3. σ<sub>M</sub> = 15/5 = 3, z = 5/3 = <b>1.67</b>. 4. Not beyond ±1.96, so <b>fail to reject H<sub>0</sub></b>. 5. “The special training did <b>not</b> have a statistically significant effect on test scores, <i>z</i> = 1.67, <i>p</i> &gt; .05.”</details>
+<details><summary>Effect size (optional here)</summary>d = 5/15 = <b>0.33</b>, between the small (0.2) and medium (0.5) benchmarks; the textbook calls it a medium effect.</details></div>
+<div class="c"><h3>🧮 Try it: effect size vs significance</h3><p style="margin-top:0">Raise n and watch z grow while d (shown in the output) stays put.</p><div id="t5"></div></div>
+<div id="lc-s85"></div></section>
+
+<section class="pg" id="s86"><h2>8.6 Statistical power</h2>
+<div class="c def"><p><b>Power</b> is the probability that a test correctly rejects a false H<sub>0</sub>, so it detects a real effect. Power = 1 − β, so a power of 70% means β = 30%. Researchers compute power <i>before</i> the study to see if it is likely to succeed.</p>
+<p><b>To compute power:</b> (1) find the critical boundary on the null distribution (μ ± z<sub>crit</sub>·σ<sub>M</sub>); (2) centre a second distribution of sample means at μ + effect; (3) find the proportion of that treated distribution beyond the boundary.</p></div>
+<div class="c ex"><h3>✏️ Example 8.6 (worked)</h3><p>μ = 80, σ = 10, n = 25, expected effect +8 points, two-tailed α = .05.</p>
+<details open><summary>Step 1: standard error</summary>σ<sub>M</sub> = 10/5 = 2.</details>
+<details><summary>Step 2: critical boundary</summary>M = 80 + 1.96(2) = <b>83.92</b>.</details>
+<details><summary>Step 3: treated distribution (centred at 88)</summary>z = (83.92 − 88)/2 = −2.04. Proportion above: p(z &gt; −2.04) = <b>0.9793</b>.</details>
+<details><summary>Conclusion</summary>Power ≈ 97.93%: the study is almost sure to detect an 8-point effect. With only a 4-point effect (centre 84), z = −0.04 and power = 0.5160.</details></div>
+<div class="c ex"><h3>✏️ Example 8.7: try first</h3><p>Same study but n = 4. Find the power.</p><details><summary>Show solution</summary>σ<sub>M</sub> = 5; boundary M = 80 + 1.96(5) = 89.8; z = (89.8 − 88)/5 = 0.36; power = p(z &gt; 0.36) = <b>0.3594</b> (35.94%).</details></div>
+<div class="c def"><h3>What increases power?</h3><ul><li>A <b>larger treatment effect</b> (bigger effect size).</li><li>A <b>larger sample</b> (smaller σ<sub>M</sub>). Also a smaller σ.</li><li>A <b>larger alpha</b> (for example .05 instead of .01).</li><li>A <b>one-tailed</b> test (when the effect is in the predicted direction).</li></ul></div>
+<div class="c"><h3>🧮 Power calculator</h3><div class="row">μ <input type="number" id="pm" value="80"> σ <input type="number" id="ps" value="10"> n <input type="number" id="pn" value="25"> effect <input type="number" id="pe" value="8"></div>
+<div class="row">α <select id="pa"><option>.05</option><option>.01</option><option>.001</option></select> <select id="pt"><option value="2">two-tailed</option><option value="1">one-tailed (effect in predicted direction)</option></select></div><div class="out" id="pout"></div>
+<p style="font-size:.9rem;color:var(--mut);margin-bottom:0">Like the textbook, this counts only the tail in the direction of the effect.</p></div>
+<div id="lc-s86"></div></section>
+
+<section class="pg" id="practice"><h2>✏️ Practice problems</h2>
+<div class="c warn"><p>Work each one on paper first, then press <b>Check answer</b>. Only the final answers are shown. Always follow the five steps (ending with a written conclusion), and sketch the distribution with the critical region shaded.</p></div>
+<div class="c" id="plist"></div></section>
+</main>
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const erf=x=>{const t=1/(1+.3275911*Math.abs(x)),y=1-(((((1.061405429*t-1.453152027)*t)+1.421413741)*t-.284496736)*t+.254829592)*t*Math.exp(-x*x);return x>=0?y:-y};
+const cdf=z=>.5*(1+erf(z/Math.SQRT2)),pdf=z=>Math.exp(-z*z/2)/Math.sqrt(2*Math.PI);
+const C2={".05":1.96,".01":2.58,".001":3.30},C1={".05":1.65,".01":2.33,".001":3.09};
+const pages=[["big","Big picture"],["s81","8.1 Logic"],["s82","8.2 Errors"],["s83","8.3 More on tests"],["s84","8.4 One-tailed"],["s85","8.5 Effect size"],["s86","8.6 Power"],["practice","Practice"]];
+$("#nav").innerHTML=pages.map(p=>`<a href="#${p[0]}" data-p="${p[0]}">${p[1]}</a>`).join("");
+function show(){const h=(location.hash||"#big").slice(1),id=pages.some(p=>p[0]==h)?h:"big";$$(".pg").forEach(e=>e.classList.toggle("on",e.id==id));$$("nav a").forEach(a=>a.classList.toggle("on",a.dataset.p==id))}
+addEventListener("hashchange",show);show();
+/* hypothesis test widget */
+function mkTest(id,d){const el=$("#"+id),g=k=>parseFloat(el.querySelector(`[data-k=${k}]`).value),s=k=>el.querySelector(`[data-k=${k}]`).value;
+el.innerHTML=`<div class="row">μ <input type="number" data-k="m" value="${d.m}"> σ <input type="number" data-k="s" value="${d.s}"> n <input type="number" data-k="n" value="${d.n}"> M <input type="number" data-k="x" value="${d.x}" step="any"></div>
+<div class="row">α <select data-k="a"><option>.05</option><option>.01</option><option>.001</option></select> <select data-k="t"><option value="2">two-tailed</option><option value="r">one-tailed, H₁: μ &gt; μ₀</option><option value="l">one-tailed, H₁: μ &lt; μ₀</option></select></div>
+<svg viewBox="0 0 400 120" width="100%" role="img" aria-label="Normal curve with critical region and sample z"></svg><div class="out"></div>`;
+el.querySelector("[data-k=t]").value=d.t||"2";
+function run(){const m=g("m"),sg=g("s"),n=g("n"),x=g("x"),a=s("a"),t=s("t");if(!(sg>0&&n>0))return;
+const se=sg/Math.sqrt(n),z=(x-m)/se,c=t=="2"?C2[a]:C1[a],rej=t=="2"?Math.abs(z)>c:t=="r"?z>c:z<-c;
+const p=t=="2"?2*(1-cdf(Math.abs(z))):t=="r"?1-cdf(z):cdf(z),dd=Math.abs(x-m)/sg;
+const X=v=>20+(v+4)*45,Y=v=>100-85*pdf(v)/pdf(0);
+const curve=(l,h)=>{let q=`M${X(l)} 100`;for(let v=l;v<=h+1e-9;v+=.1)q+=`L${X(v).toFixed(1)} ${Y(v).toFixed(1)}`;return q+`L${X(h)} 100Z`};
+let sh="";if(t!="l")sh+=`<path d="${curve(c,4)}" fill="var(--bad)" opacity=".45"/>`;if(t!="r")sh+=`<path d="${curve(-4,-c)}" fill="var(--bad)" opacity=".45"/>`;
+const zz=Math.max(-4,Math.min(4,z));
+el.querySelector("svg").innerHTML=`<path d="${curve(-4,4)}" fill="var(--tb)" stroke="var(--teal)" stroke-width="2"/>${sh}<line x1="${X(zz)}" y1="8" x2="${X(zz)}" y2="100" stroke="var(--amb)" stroke-width="3"/><text x="${Math.min(340,Math.max(10,X(zz)+5))}" y="16" fill="var(--ink)" font-size="12">z = ${z.toFixed(2)}</text><line x1="10" y1="100" x2="390" y2="100" stroke="var(--line)"/>`;
+const h0=t=="2"?`μ = ${m}`:t=="r"?`μ ≤ ${m}`:`μ ≥ ${m}`,h1=t=="2"?`μ ≠ ${m}`:t=="r"?`μ > ${m}`:`μ < ${m}`;
+el.querySelector(".out").innerHTML=`<b>1.</b> H₀: ${h0}; H₁: ${h1}; α = ${a}<br><b>2.</b> Critical region: ${t=="2"?"z beyond ±"+c:t=="r"?"z > "+c:"z < −"+c}<br><b>3.</b> σ<sub>M</sub> = ${sg}/√${n} = ${se.toFixed(3)}; z = (${x} − ${m})/${se.toFixed(3)} = <b>${z.toFixed(2)}</b> (p ≈ ${p<.0001?"&lt; .0001":p.toFixed(4)})<br><b>4.</b> Decision: <b>${rej?"Reject H₀":"Fail to reject H₀"}</b><br><b>5.</b> Conclusion: <i>${rej?"The treatment had a statistically significant effect, z = "+z.toFixed(2)+", p &lt; "+a+(t=="2"?"":", one tailed")+", d = "+dd.toFixed(2)+".":"The treatment did not have a statistically significant effect, z = "+z.toFixed(2)+", p &gt; "+a+(t=="2"?"":", one tailed")+"."}</i><br>Effect size: Cohen’s d = |${x} − ${m}|/${sg} = <b>${dd.toFixed(2)}</b> (${dd<.2?"smaller than small":dd<.5?"small":dd<.8?"medium":"large"})`}
+el.querySelectorAll("input,select").forEach(e=>{e.oninput=run;e.onchange=run});run()}
+mkTest("t1",{m:15.8,s:2.4,n:36,x:16.7});mkTest("t3",{m:15.8,s:2.4,n:36,x:16.7});mkTest("t4",{m:15.8,s:2.4,n:36,x:16.5,t:"r"});mkTest("t5",{m:50,s:10,n:25,x:51});
+/* power */
+function pw(){const m=+$("#pm").value,s=+$("#ps").value,n=+$("#pn").value,e=+$("#pe").value,a=$("#pa").value,t=$("#pt").value;if(!(s>0&&n>0))return;
+const se=s/Math.sqrt(n),c=t=="2"?C2[a]:C1[a],up=e>=0,b=up?m+c*se:m-c*se,z=(b-(m+e))/se,pow=up?1-cdf(z):cdf(z);
+$("#pout").innerHTML=`σ<sub>M</sub> = ${se.toFixed(3)}; critical boundary M = ${b.toFixed(2)}; treated mean = ${m+e}<br>z = (${b.toFixed(2)} − ${m+e})/${se.toFixed(3)} = ${z.toFixed(2)}<br>Power = <b>${(pow*100).toFixed(2)}%</b> (${pow.toFixed(4)}); β = ${(1-pow).toFixed(4)}`}
+$$("#pm,#ps,#pn,#pe,#pa,#pt").forEach(e=>e.oninput=pw);pw();
+/* error explorer */
+const inv=p=>{let a=-8,b=8;for(let i=0;i<60;i++){const m=(a+b)/2;cdf(m)<p?a=m:b=m}return(a+b)/2};
+function err(){const al=$("#ea").value/1000,d=$("#ed").value/10,c=inv(1-al),X=v=>10+(v+3)*40,Y=(v,u)=>100-85*pdf(v-u)/pdf(0);
+const ar=(u,l,h)=>{let q=`M${X(l)} 100`;for(let v=l;v<=h+1e-9;v+=.1)q+=`L${X(v).toFixed(1)} ${Y(v,u).toFixed(1)}`;return q+`L${X(h)} 100Z`};const b=cdf(c-d);
+$("#esvg").innerHTML=`<path d="${ar(0,-3,6.5)}" fill="var(--tb)" stroke="var(--teal)" stroke-width="2"/><path d="${ar(d,-3,6.5)}" fill="none" stroke="var(--mut)" stroke-width="2" stroke-dasharray="5 3"/><path d="${ar(0,c,6.5)}" fill="var(--bad)" opacity=".55"/><path d="${ar(d,-3,c)}" fill="var(--amb)" opacity=".45"/><line x1="${X(c)}" y1="6" x2="${X(c)}" y2="100" stroke="var(--ink)" stroke-width="2"/><text x="${Math.min(300,X(c)+4)}" y="14" fill="var(--ink)" font-size="11">alarm line</text><line x1="10" y1="100" x2="390" y2="100" stroke="var(--line)"/>`;
+$("#eav").textContent=`α = ${al.toFixed(3)}`;
+$("#eout").innerHTML=`🔴 Type I risk (false alarm) = α = <b>${al.toFixed(3)}</b><br>🟠 Type II risk (miss) = β = <b>${b.toFixed(3)}</b><br>✅ Power = 1 − β = <b>${(1-b).toFixed(3)}</b><br>Slide α smaller (alarm line moves right): the red area shrinks but the orange area grows. A bigger real effect shrinks the orange area.`}
+$("#ea").oninput=$("#ed").oninput=err;err();
+/* learning checks */
+const LC={
+s81:[["A sample of n = 16 comes from a population with μ = 40, σ = 12 and has M = 42 after treatment. How does it compare with samples expected if the treatment has no effect?",["An extreme value, very unlikely if there is no effect","Much the same as samples expected with no effect","Noticeably larger, but not quite extreme","Cannot compare"],1,"σ<sub>M</sub> = 12/4 = 3, so z = 2/3 = 0.67, well inside ±1.96."],
+["n = 20 from a normal population with μ = 80, σ = 20. What is the null hypothesis?",["μ = 80","M = 80","μ ≠ 80","M ≠ 80"],0,"Hypotheses are about the population mean (μ), and H₀ says there is no change."],
+["What is the correct decision if the z-score is in the critical region?",["Reject H₀","Fail to reject H₀","Reject H₁","Fail to reject H₁"],0,"A z in the critical region is very unlikely if H₀ is true, so we reject H₀."],
+["n = 25, a two-tailed test gives z = 1.77. What is the decision?",["Reject with α = .05 but not .01","Reject with either α","Fail to reject with either α = .05 or .01","Cannot answer"],2,"1.77 is inside ±1.96 and inside ±2.58, so we fail to reject H₀ at both levels."]],
+s82:[["When does a researcher risk a Type I error?",["Anytime H₀ is rejected","Anytime H₁ is rejected","Anytime the decision is “fail to reject H₀”","All of the other options"],0,"A Type I error is rejecting a true H₀, so the risk exists whenever H₀ is rejected."],
+["Which defines a Type II error?",["Rejecting a false null","Rejecting a true null","Failing to reject a false null","Failing to reject a true null"],2,"A Type II error misses a real effect: failing to reject a false H₀."],
+["What is a likely outcome of a test when the treatment has a very small effect?",["A Type I error","A Type II error","Correctly reject H₀","Correctly fail to reject H₀"],1,"A small effect rarely pushes the sample into the critical region, so the real effect is missed."]],
+s83:[["A report says “z = 2.13, p < .05.” What is the correct interpretation?",["H₀ rejected; probability of a Type I error is below .05","H₀ rejected; probability of a Type II error is below .05","H₀ not rejected; Type I probability below .05","H₀ not rejected; Type II probability below .05"],0,"p < .05 means the result is in the critical region (H₀ rejected), and α is the Type I error probability."],
+["Which is NOT an assumption of the z-score test?",["Observations are independent","μ is the same after treatment as before","σ is the same after treatment as before","The sample is random"],1,"The treatment is allowed to change μ (that is what we test). It is σ that is assumed unchanged."],
+["n = 16 from μ = 80, σ = 5, and the treatment really has an effect. What happens if σ is increased to 25?",["z more extreme; more likely to conclude an effect exists","z more extreme; more likely to conclude no effect","z near zero; more likely to conclude an effect exists","z near zero; more likely to conclude no effect"],3,"A larger σ gives a larger σ<sub>M</sub>, shrinking z toward zero and making it harder to reject H₀."]],
+s84:[["A treatment is predicted to increase scores and is tested with a directional test. The critical region is ______.",["Entirely in the right tail","Entirely in the left tail","Split between both tails","Unknown without α"],0,"Evidence that the treatment increased scores lies in the high tail, so all of α goes there."],
+["μ = 45 and the treatment is expected to decrease scores. What is the null hypothesis for a directional test?",["μ ≥ 45","μ ≤ 45","M ≤ 45","M ≥ 45"],0,"H₁: μ < 45 (a decrease), so H₀ covers everything else: μ ≥ 45."],
+["Increase predicted; one-tailed test gives z = −1.85. What is the decision?",["Reject at .05 but not .01","Reject at either α","Fail to reject at either α = .05 or .01","Cannot answer"],2,"z = −1.85 is in the left tail, but the critical region is in the right tail. The result is opposite the prediction, so fail to reject."]],
+s85:[["Which is most likely to reject H₀ even when the treatment effect is very small?",["Small sample, small σ","Small sample, large σ","Large sample, small σ","Large sample, large σ"],2,"A large n and a small σ give the smallest σ<sub>M</sub>, so even a small difference yields a large z."],
+["μ = 80, σ = 10, M = 85 after treatment. What is Cohen’s d?",["5.00","2.00","0.50","Impossible to calculate"],2,"d = (85 − 80)/10 = 0.50."],
+["If other factors are constant, how does a larger σ affect the chance of rejecting H₀ and Cohen’s d?",["Increases both","Increases rejection, decreases d","Decreases rejection, increases d","Decreases both"],3,"A larger σ shrinks z (less likely to reject) and shrinks d = difference/σ."]],
+s86:[["Which defines the power of a test?",["Probability of rejecting a true null","Probability of supporting a true null","Probability of rejecting a false null","Probability of supporting a false null"],2,"Power = 1 − β, the probability of correctly rejecting a false H₀."],
+["How does increasing sample size affect the likelihood of rejecting H₀ and the power?",["Both increase","Both decrease","Rejection increases; power unchanged","Rejection decreases; power unchanged"],0,"A larger n shrinks σ<sub>M</sub>, which increases z and therefore power."],
+["How does an increase in σ affect the likelihood of rejecting H₀ and the power?",["Both increase","Both decrease","Rejection increases; power unchanged","Rejection decreases; power unchanged"],1,"A larger σ enlarges σ<sub>M</sub>, so both the chance of rejecting and the power fall."]]};
+Object.keys(LC).forEach(k=>{let ok=0,t=LC[k].length;const box=$("#lc-"+k);
+box.className="c";box.innerHTML=`<h3>✅ Learning check <span style="font-weight:400;color:var(--mut)" id="sc-${k}">(0 of ${t} correct)</span></h3>`;
+LC[k].forEach((q,i)=>{const d=document.createElement("div");d.className="q";d.innerHTML=`<p><b>${i+1}.</b> ${q[0]}</p>`+q[1].map((o,j)=>`<button data-j="${j}">${"abcd"[j]}. ${o}</button>`).join("")+`<div class="out" hidden></div>`;
+d.onclick=e=>{const b=e.target.closest("button");if(!b||d.dataset.done)return;d.dataset.done=1;const j=+b.dataset.j;
+d.querySelectorAll("button")[q[2]].classList.add("r");if(j==q[2])ok++;else b.classList.add("w");
+const o=d.querySelector(".out");o.hidden=false;o.innerHTML=(j==q[2]?"✅ Correct. ":"❌ Not quite. The answer is "+"abcd"[q[2]]+". ")+q[3];$("#sc-"+k).textContent=`(${ok} of ${t} correct)`};box.appendChild(d)})});
+/* type I / II practice */
+function mkQuiz(id,head,arr){let ok=0;const box=$("#"+id),t=arr.length;box.className="c";box.innerHTML=`<h3>${head} <span style="font-weight:400;color:var(--mut)" id="sc-${id}">(0 of ${t} correct)</span></h3>`;
+arr.forEach((q,i)=>{const d=document.createElement("div");d.className="q";d.innerHTML=`<p><b>${i+1}.</b> ${q[0]}</p>`+q[1].map((o,j)=>`<button data-j="${j}">${o}</button>`).join("")+`<div class="out" hidden></div>`;
+d.onclick=e=>{const b=e.target.closest("button");if(!b||d.dataset.done)return;d.dataset.done=1;const j=+b.dataset.j;d.querySelectorAll("button")[q[2]].classList.add("r");if(j==q[2])ok++;else b.classList.add("w");const o=d.querySelector(".out");o.hidden=false;o.innerHTML=(j==q[2]?"✅ Correct. ":"❌ Not quite. ")+q[3];$("#sc-"+id).textContent=`(${ok} of ${t} correct)`};box.appendChild(d)})}
+const T=["Type I error (false alarm)","Type II error (a miss)","Correct decision"];
+mkQuiz("eq1","🧩 Practice 1: name the outcome",[
+["🔥 There is <b>no fire</b>, but the smoke alarm rings because of burnt toast.",T,0,"The alarm “rejected” the idea of no fire, but there was no fire. A false alarm is a Type I error."],
+["🔥 There <b>is a real fire</b> but the smoke alarm stays silent.",T,1,"A real problem was missed. That is a Type II error."],
+["🔥 There is a real fire and the alarm rings.",T,2,"The decision matches reality, so it is correct."],
+["🐺 A shepherd shouts “WOLF!” but it was only a big dog.",T,0,"Shouting means rejecting H₀ (“no wolf”), but H₀ was true. Type I."],
+["🐺 The shepherd says nothing and a real wolf sneaks in.",T,1,"Staying quiet means failing to reject H₀, but H₀ was false. Type II."],
+["🧪 A new tutoring app does <b>nothing</b>, but one study’s sample mean lands in the critical region and the researcher announces “It works!”",T,0,"The researcher rejected a true H₀. Type I."],
+["💊 A new medicine really lowers blood pressure, but a small study gives <i>p</i> &gt; .05 and the researcher says “not enough evidence.”",T,1,"The researcher failed to reject a false H₀. Type II. A larger sample would give more power."],
+["🌱 A fertilizer really helps plants grow, and the test rejects H₀.",T,2,"Rejecting a false H₀ is a correct decision. This is what power measures."],
+["🍀 A “lucky charm” does nothing, and the test fails to reject H₀.",T,2,"Failing to reject a true H₀ is correct."],
+["⚖️ A jury convicts a person who is actually innocent. (H₀ = “innocent.”)",T,0,"Convicting means rejecting H₀, but H₀ was true. Type I."],
+["⚖️ A jury finds a guilty person “not guilty” because the evidence was weak.",T,1,"The jury failed to reject a false H₀. Type II."]]);
+mkQuiz("eq2","🧠 Practice 2: check the idea",[
+["Which error does the alpha level (α) control?",["Type I","Type II","Both equally"],0,"α is the probability of rejecting a true H₀, which is the Type I error rate. Type II has its own symbol, β."],
+["A researcher <b>rejects</b> H₀. Which mistake could they have made?",["Type I only","Type II only","Either one"],0,"Rejecting H₀ can only be wrong if H₀ was true. That is Type I."],
+["A researcher <b>fails to reject</b> H₀. Which mistake could they have made?",["Type I only","Type II only","Either one"],1,"Not rejecting can only be wrong if H₀ was false. That is Type II."],
+["Everything else equal, you change α from .05 to .01. What happens to the chance of a Type II error?",["It goes up","It goes down","It stays the same"],0,"A stricter alarm line gives fewer false alarms but more misses. Try the slider above."],
+["Which is usually treated as the more serious error in research, and why?",["Type I: it leads to false reports in the literature","Type II: nobody ever finds out","They are always equally serious"],0,"A false claim can be published and built upon, so researchers keep α small (.05 or less)."]]);
+/* practice */
+const P=[["Identify the four steps of a hypothesis test.","(1) State H₀ and H₁ and set α. (2) Locate the critical region. (3) Collect data and compute the test statistic (z). (4) Make a decision: reject or fail to reject H₀. (5) State the conclusion, reporting “statistically significant” (or not), the z value, p &lt; α or p &gt; α, and Cohen’s d when the result is significant."],
+["Define the alpha level and the critical region.","Alpha is the probability value that defines “very unlikely” and equals the probability of a Type I error. The critical region is the set of extreme sample outcomes (in the tails) that are very unlikely if H₀ is true; a sample there leads to rejecting H₀."],
+["Define a Type I and a Type II error and explain their consequences.","Type I: rejecting a true H₀, so claiming an effect that does not exist (a false report; serious; probability = α). Type II: failing to reject a false H₀, so missing a real effect (usually less serious; probability = β)."],
+["If α changes from .05 to .01: (a) what happens to the critical region boundaries? (b) what happens to the probability of a Type I error?","(a) The boundaries move farther out (±1.96 to ±2.58), so the critical region shrinks. (b) The Type I error probability decreases from .05 to .01."],
+["Holding other variables constant, how is z influenced by: (a) a larger difference between M and μ, (b) a larger σ, (c) a larger n?","(a) z increases. (b) z decreases (σ<sub>M</sub> gets bigger). (c) z increases (σ<sub>M</sub> gets smaller)."],
+["Herbal supplement study: μ = 50, σ = 12 (normal), n = 16, M = 54. (a) State H₀ in a sentence with both variables. (b) Do a two-tailed test, α = .05.","(a) H₀: taking the herbal supplement has no effect on memory test scores (μ with supplement = 50). (b) σ<sub>M</sub> = 3, z = 4/3 = 1.33; critical z = ±1.96. Step 4: fail to reject H₀. Step 5: taking the supplement did not have a statistically significant effect on memory scores, <i>z</i> = 1.33, <i>p</i> &gt; .05."],
+["Average study time was μ = 14 hours/week. A sample of n = 64 has M = 12.5, σ = 4.8. Significant change? Two-tailed, α = .05.","σ<sub>M</sub> = 0.6, z = −1.5/0.6 = −2.50. Beyond ±1.96, so reject H₀. Conclusion: study time changed in a statistically significant way (a decrease), <i>z</i> = −2.50, <i>p</i> &lt; .05, <i>d</i> = 0.31."],
+["Self-esteem: μ = 50, σ = 15, n = 100 with group participation, M = 53.8. (a) Two-tailed test, α = .05. (b) Cohen’s d. (c) Write the report sentence.","(a) σ<sub>M</sub> = 1.5, z = 3.8/1.5 = 2.53; reject H₀. (b) d = 3.8/15 = 0.25 (small). (c) e.g. “Group participation had a statistically significant effect on self-esteem, <i>z</i> = 2.53, <i>p</i> &lt; .05, <i>d</i> = 0.25.”"],
+["Online course: n = 36, M = 76, population μ = 71. Two-tailed, α = .05. (a) σ = 12; (b) σ = 18; (c) explain the effect of σ.","(a) σ<sub>M</sub> = 2, z = 2.50: reject H₀. Conclusion: statistically significant difference, <i>z</i> = 2.50, <i>p</i> &lt; .05, <i>d</i> = 0.42. (b) σ<sub>M</sub> = 3, z = 1.67: fail to reject H₀. Conclusion: not statistically significant, <i>z</i> = 1.67, <i>p</i> &gt; .05. (c) A larger σ gives a larger standard error and a smaller z, so significance is less likely."],
+["μ = 30, σ = 8, M = 33. Two-tailed, α = .05. (a) n = 16; (b) n = 64; (c) explain the effect of n.","(a) σ<sub>M</sub> = 2, z = 1.50: fail to reject H₀ (not statistically significant, <i>p</i> &gt; .05). (b) σ<sub>M</sub> = 1, z = 3.00: reject H₀ (statistically significant, <i>z</i> = 3.00, <i>p</i> &lt; .05, <i>d</i> = 0.38). (c) A larger n shrinks the standard error and raises z, so significance is more likely."],
+["μ = 40, n = 25, M = 44. Two-tailed, α = .05. (a) σ = 5; (b) σ = 15; (c) explain the effect of σ.","(a) σ<sub>M</sub> = 1, z = 4.00: reject H₀ (statistically significant, <i>z</i> = 4.00, <i>p</i> &lt; .05, <i>d</i> = 0.80). (b) σ<sub>M</sub> = 3, z = 1.33: fail to reject H₀ (not statistically significant, <i>p</i> &gt; .05). (c) Greater variability makes a significant result less likely."],
+["Snack variety, μ = 4.22, σ = 0.60. (a) Overweight sample n = 36, M = 4.48: different from μ? Two-tailed, α = .05. (b) Healthy-weight n = 25, M = 4.01: significantly fewer snacks? One-tailed, α = .05.","(a) σ<sub>M</sub> = 0.10, z = 2.60 &gt; 1.96: reject H₀. Conclusion: statistically significantly different, <i>z</i> = 2.60, <i>p</i> &lt; .05, <i>d</i> = 0.43. (b) H₁: μ &lt; 4.22. σ<sub>M</sub> = 0.12, z = −1.75 &lt; −1.65: reject H₀. Conclusion: healthy-weight students ate statistically significantly fewer fatty, sugary snacks, <i>z</i> = −1.75, <i>p</i> &lt; .05, one tailed, <i>d</i> = 0.35."],
+["μ = 100, σ = 20, M = 96. (a) How large must n be for significance (two-tailed, α = .05)? (b) Same if M = 98.","(a) z = 4√n/20 = √n/5 must exceed 1.96, so n &gt; 96.04: at least n = 97. (b) z = 2√n/20 = √n/10 must exceed 1.96, so n &gt; 384.16: at least n = 385."],
+["Alcohol and reaction time: μ = 400, σ = 40, n = 25, M = 422. (a) Two-tailed, α = .01. (b) One-tailed (slowed), α = .01. (c) Cohen’s d.","σ<sub>M</sub> = 8, z = 2.75. (a) 2.75 &gt; 2.58: reject H₀; alcohol had a statistically significant effect, <i>z</i> = 2.75, <i>p</i> &lt; .01, <i>d</i> = 0.55. (b) 2.75 &gt; 2.33: reject H₀; alcohol statistically significantly slowed reaction time, <i>z</i> = 2.75, <i>p</i> &lt; .01, one tailed. (c) d = 22/40 = 0.55 (medium)."],
+["Caffeine: μ = 400, σ = 40, n = 36, M = 392. (a) Two-tailed, α = .05. (b) Cohen’s d. (c) Report sentence.","(a) σ<sub>M</sub> = 6.67, z = −1.20: fail to reject H₀. (b) d = 8/40 = 0.20 (small). (c) e.g. “Caffeine did not have a statistically significant effect on reaction time, <i>z</i> = −1.20, <i>p</i> &gt; .05, <i>d</i> = 0.20.”"],
+["90° days: μ = 9.6, σ = 1.9, last n = 4 years M = 12.25. More 90° days than expected? One-tailed, α = .05.","H₁: μ &gt; 9.6. σ<sub>M</sub> = 0.95, z = 2.65/0.95 = 2.79 &gt; 1.65: reject H₀. Conclusion: the past four years had statistically significantly more 90° days, <i>z</i> = 2.79, <i>p</i> &lt; .05, one tailed, <i>d</i> = 1.39."],
+["SAT course: n = 20, M = 562, μ = 500, σ = 100. (a) Higher than the population? One-tailed, α = .01. (b) Cohen’s d. (c) Report sentence.","(a) σ<sub>M</sub> = 22.36, z = 2.77 &gt; 2.33: reject H₀. (b) d = 62/100 = 0.62 (medium). (c) e.g. “Students who took the course scored statistically significantly higher, <i>z</i> = 2.77, <i>p</i> &lt; .01, one tailed, <i>d</i> = 0.62.”"],
+["Blueberry supplement: μ = 45, σ = 9, n = 16, M = 50.2. (a) Two-tailed, α = .05. (b) Cohen’s d. (c) Report sentence.","(a) σ<sub>M</sub> = 2.25, z = 2.31 &gt; 1.96: reject H₀. (b) d = 5.2/9 = 0.58 (medium). (c) e.g. “The supplement had a statistically significant effect on cognitive skill, <i>z</i> = 2.31, <i>p</i> &lt; .05, <i>d</i> = 0.58.”"],
+["μ = 40, σ = 12, expected effect 6 points, two-tailed α = .05. Find power for (a) n = 9, (b) n = 16.","(a) σ<sub>M</sub> = 4; boundary M = 47.84; z = (47.84 − 46)/4 = 0.46; power = 0.3228. (b) σ<sub>M</sub> = 3; boundary M = 45.88; z = −0.04; power = 0.5160."],
+["Dexterity task: μ = 240, σ = 30, treatment lowers scores by 30. Two-tailed, α = .05. Power for (a) n = 9, (b) n = 25?","Treated mean = 210. (a) σ<sub>M</sub> = 10; boundary M = 220.4; z = 1.04; power = 0.8508. (b) σ<sub>M</sub> = 6; boundary M = 228.24; z = 3.04; power = 0.9988."],
+["IQ: μ = 100, σ = 15, n = 25, real increase of 7 points. Power for (a) two-tailed α = .05, (b) one-tailed α = .05.","σ<sub>M</sub> = 3; treated mean = 107. (a) Boundary M = 105.88; z = −0.37; power = 0.6443. (b) Boundary M = 104.95; z = −0.68; power = 0.7517."],
+["How does increasing sample size affect (a) the z-score, (b) Cohen’s d, (c) power?","(a) z increases (smaller σ<sub>M</sub>). (b) d is unchanged (it does not depend on n). (c) Power increases."],
+["How is power influenced by (a) raising α from .01 to .05, (b) changing from a one-tailed to a two-tailed test?","(a) Power increases (the critical boundary moves toward the null mean). (b) Power decreases (the boundary moves farther out)."]];
+$("#plist").innerHTML=P.map((p,i)=>`<div class="p"><b>${i+1}.</b> ${p[0]}<details><summary>Check answer</summary><span class="sol">${p[1]}</span></details></div>`).join("");
+</script></body></html>
